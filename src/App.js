@@ -19,14 +19,13 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}?api_key=${API_KEY}&date=${year}-${month}-${day - 1}`)
+      .get(`${BASE_URL}?api_key=${API_KEY}&date=${year}-${month}-${day}`)
       .then((res) => {
         setNasaData(res.data);
         console.log(res);
       })
       .catch((err) => console.error(err));
   }, [day]);
-  console.log(`${BASE_URL}?api_key=${API_KEY}&date=${year}-${month}-${day - 1}`);
 
   return (
     <div className="App">
