@@ -5,25 +5,40 @@ import axios from "axios";
 import Header from "./Header";
 import Image from "./Image";
 import Footer from "./Footer";
+import { Button } from "reactstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [nasaData, setNasaData] = useState();
+  let date = new Date();
+  let today = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  const [nasaData, setNasaData] = useState({});
+  const [day, setDay] = useState(today);
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}?api_key=${API_KEY}`)
+      .get(`${BASE_URL}?api_key=${API_KEY}&date=${year}-${month}-${day - 1}`)
       .then((res) => {
         setNasaData(res.data);
         console.log(res);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [day]);
+  console.log(`${BASE_URL}?api_key=${API_KEY}&date=${year}-${month}-${day - 1}`);
 
   return (
     <div className="App">
-      {nasaData && <Header title={nasaData.title} date={nasaData.date} />}
-      {nasaData && <Image imageUrl={nasaData.hdurl} imageInfo={nasaData.explanation} />}
-      {nasaData && <Footer copyRights={nasaData.copyright} />}
+      <Header title={nasaData.title} date={nasaData.date} />
+      <Button class="btn btn-primary" color="primary" onClick={() => setDay(day - 1)} disabled={day === 2}>
+        Previous Day
+      </Button>
+      <Button class="btn btn-primary" color="primary" onClick={() => setDay(day + 1)} disabled={day >= today}>
+        Next Day
+      </Button>
+      <Image imageUrl={nasaData.hdurl} imageInfo={nasaData.explanation} />
+      <Footer copyRights={nasaData.copyright} />
     </div>
   );
 }
