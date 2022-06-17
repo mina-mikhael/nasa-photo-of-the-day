@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <Header title={nasaData.title} date={nasaData.date} />
-      <Button class="btn btn-primary" color="primary" onClick={() => setDay(day - 1)} disabled={day === 2}>
+      <Button class="btn btn-primary" color="primary" onClick={() => setDay(day - 1)} disabled={day === 1}>
         Previous Day
       </Button>
       <Button class="btn btn-primary" color="primary" onClick={() => setDay(day + 1)} disabled={day >= today}>
