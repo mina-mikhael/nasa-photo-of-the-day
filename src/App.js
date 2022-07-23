@@ -36,7 +36,7 @@ function App() {
       <Button class="btn btn-primary" color="primary" onClick={() => setDay(day + 1)} disabled={day >= today}>
         Next Day
       </Button>
-      <Image imageUrl={nasaData.hdurl} imageInfo={nasaData.explanation} />
+      <Image imageUrl={nasaData.url} imageInfo={nasaData.explanation} />
       <Footer copyRights={nasaData.copyright} />
     </div>
   );
